@@ -1,281 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RP Construction Services</title>
-    <style>
-        :root {
-            --bg-color: #000;
-            --text-color: #fff;
-            --accent-color: #555;
-            --border-color: #333;
-            --highlight-color: #fff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* HEADER - Now matches services.html exactly */
-        header {
-            padding: 3rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/services-header.jpg') center/cover no-repeat;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* NAVIGATION - Perfect match to services.html */
-        nav {
-            background-color: var(--bg-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            padding: 0 2rem;
-        }
-        
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            padding: 0.7rem 1.5rem;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-        
-        nav a:hover {
-            border-color: var(--highlight-color);
-        }
-        
-        nav a.active {
-            border-color: var(--highlight-color);
-            background-color: rgba(255,255,255,0.1);
-        }
-        
-        /* MAIN CONTENT */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .about-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-bottom: 4rem;
-            align-items: center;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-image img {
-            width: 100%;
-            border: 1px solid var(--border-color);
-        }
-        
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .team-member {
-            text-align: center;
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-        }
-        
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            border: 3px solid var(--text-color);
-        }
-        
-        .values-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .value-item {
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-        }
-        
-        .value-item h3 {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
-        }
-        
-        @media (max-width: 768px) {
-            header {
-                padding: 2rem 1rem;
-            }
-            
-            .about-section {
-                flex-direction: column;
-            }
-            
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RP Construction Services</title>
+  <style>
+    :root {
+      --bg-color: #000;
+      --text-color: #fff;
+      --accent-color: #555;
+      --border-color: #333;
+      --highlight-color: #fff;
+    }
 
-            .nav-container {
-                gap: 0.8rem;
-                padding: 0 1rem;
-            }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-            nav a {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/services-header.jpg') center/cover no-repeat;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 0 2rem;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      padding: 0.7rem 1.5rem;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      border-color: var(--highlight-color);
+    }
+
+    nav a.active {
+      border-color: var(--highlight-color);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      align-items: center;
+    }
+
+    .about-text,
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-image img {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      max-width: 100%;
+      height: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      text-align: center;
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+    }
+
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid var(--text-color);
+    }
+
+    .values-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .value-item {
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+    }
+
+    .value-item h3 {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+    }
+
+    /* Tablet styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 2rem 1rem;
+      }
+
+      .about-section {
+        flex-direction: column;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-container {
+        gap: 0.8rem;
+        padding: 0 1rem;
+      }
+
+      nav a {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Mobile styles */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .values-list {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      .value-item,
+      .team-member {
+        padding: 1rem;
+      }
+
+      .about-text p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    
-    <header>
-        <h1>RP Construction Services</h1>
-        <p>Building Excellence Since 2010</p>
-    </header>
-    
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="active">Home</a>
-            <a href="services.html">Services</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-    
-   
-    <div class="container">
-        <section class="about-section">
-            <div class="about-text">
-                <h2>Our Story</h2>
-                <p>Founded in 2010, RP Construction Services began as a small team of passionate craftsmen dedicated to quality renovations. What started as bathroom remodels has grown into a full-service construction company serving residential and commercial clients across the region.</p>
-                <p>We take pride in transforming spaces while maintaining the highest standards of workmanship. Every project receives the same attention to detail, whether it's a simple plumbing fix or a complete kitchen overhaul.</p>
-            </div>
-            <div class="about-image">
-                <img src="Images/Team.webp" alt="Our team at work">
-            </div>
-        </section>
-        
-        <section>
-            <h2>Our Team</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="Images/Lead.webp" alt="Robert Parker">
-                    <h3>Robert Parker</h3>
-                    <p>Founder & Lead Contractor</p>
-                </div>
-                <div class="team-member">
-                    <img src="Images/project.jpeg" alt="Sarah Chen">
-                    <h3>Sarah Chen</h3>
-                    <p>Project Manager</p>
-                </div>
-                <div class="team-member">
-                    <img src="Images/p.Manager.jpeg" alt="Mike Rodriguez">
-                    <h3>Mike Rodriguez</h3>
-                    <p>Master Plumber</p>
-                </div>
-                <div class="team-member">
-                    <img src="Images/tile.jpeg" alt="Lisa Wong">
-                    <h3>Lisa Wong</h3>
-                    <p>Tile Specialist</p>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Our Values</h2>
-            <div class="values-list">
-                <div class="value-item">
-                    <h3>✓ Quality Craftsmanship</h3>
-                    <p>We never cut corners. Every detail matters in delivering work that lasts.</p>
-                </div>
-                <div class="value-item">
-                    <h3>✓ Transparent Pricing</h3>
-                    <p>No hidden fees or surprise charges. Honest quotes from day one.</p>
-                </div>
-                <div class="value-item">
-                    <h3>✓ Clean Worksites</h3>
-                    <p>We treat your home with respect and leave it cleaner than we found it.</p>
-                </div>
-            </div>
-        </section>
-    </div>
+  <header>
+    <h1>RP Construction Services</h1>
+    <p>Building Excellence Since 2010</p>
+  </header>
 
-    <footer>
-        <p>&copy; 2025 R.P Contractors. All rights reserved.</p>
-    </footer>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="active">Home</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="about-section">
+      <div class="about-text">
+        <h2>Our Story</h2>
+        <p>Founded in 2010, RP Construction Services began as a small team of passionate craftsmen dedicated to quality renovations. What started as bathroom remodels has grown into a full-service construction company serving residential and commercial clients across the region.</p>
+        <p>We take pride in transforming spaces while maintaining the highest standards of workmanship. Every project receives the same attention to detail, whether it's a simple plumbing fix or a complete kitchen overhaul.</p>
+      </div>
+      <div class="about-image">
+        <img src="Images/Team.webp" alt="Our team at work">
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="Images/Lead.webp" alt="Robert Parker">
+          <h3>Robert Parker</h3>
+          <p>Founder & Lead Contractor</p>
+        </div>
+        <div class="team-member">
+          <img src="Images/project.jpeg" alt="Sarah Chen">
+          <h3>Sarah Chen</h3>
+          <p>Project Manager</p>
+        </div>
+        <div class="team-member">
+          <img src="Images/p.Manager.jpeg" alt="Mike Rodriguez">
+          <h3>Mike Rodriguez</h3>
+          <p>Master Plumber</p>
+        </div>
+        <div class="team-member">
+          <img src="Images/tile.jpeg" alt="Lisa Wong">
+          <h3>Lisa Wong</h3>
+          <p>Tile Specialist</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Values</h2>
+      <div class="values-list">
+        <div class="value-item">
+          <h3>✓ Quality Craftsmanship</h3>
+          <p>We never cut corners. Every detail matters in delivering work that lasts.</p>
+        </div>
+        <div class="value-item">
+          <h3>✓ Transparent Pricing</h3>
+          <p>No hidden fees or surprise charges. Honest quotes from day one.</p>
+        </div>
+        <div class="value-item">
+          <h3>✓ Clean Worksites</h3>
+          <p>We treat your home with respect and leave it cleaner than we found it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 R.P Contractors. All rights reserved.</p>
+  </footer>
 </body>
 </html>
