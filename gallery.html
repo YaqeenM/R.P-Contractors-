@@ -8,7 +8,10 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
   />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
   <style>
     :root {
       --bg-color: #000;
@@ -27,7 +30,7 @@
     }
 
     body {
-      font-family: "Arial", sans-serif;
+      font-family: Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
@@ -36,15 +39,12 @@
       flex-direction: column;
     }
 
-    /* HEADER (matches services.html) */
+    /* HEADER */
     header {
       padding: 3rem 2rem;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
-      background: linear-gradient(
-          rgba(0, 0, 0, 0.7),
-          rgba(0, 0, 0, 0.7)
-        ),
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
         url("images/services-header.jpg") center/cover no-repeat;
       position: relative;
     }
@@ -118,7 +118,7 @@
       border-bottom: 10px solid var(--highlight-color);
     }
 
-    /* GALLERY STYLES */
+    /* GALLERY CONTAINER */
     .gallery-container {
       padding: 2rem;
       max-width: 1400px;
@@ -126,6 +126,7 @@
       flex: 1;
     }
 
+    /* FILTER BUTTONS */
     .service-filter {
       display: flex;
       justify-content: center;
@@ -166,6 +167,7 @@
       background-color: var(--highlight-color);
     }
 
+    /* GALLERY GRID */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -180,7 +182,21 @@
       border: 1px solid var(--border-color);
       transition: all var(--transition-speed) ease;
       border-radius: 8px;
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
     }
+
+    /* Staggered animation delays */
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+    .gallery-item:nth-child(10) { animation-delay: 1s; }
 
     .gallery-item:hover {
       transform: translateY(-5px);
@@ -192,11 +208,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      user-select: none;          
-      -webkit-user-drag: none;   
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-drag: none;
+      user-select: none;
       pointer-events: none;
       display: block;
     }
@@ -214,12 +226,14 @@
       transform: translateY(100%);
       transition: transform var(--transition-speed) ease;
       font-weight: bold;
+      user-select: none;
     }
 
     .gallery-item:hover::after {
       transform: translateY(0);
     }
 
+    /* SERVICE BADGE */
     .service-badge {
       position: absolute;
       top: 10px;
@@ -232,9 +246,10 @@
       font-weight: bold;
       text-transform: uppercase;
       z-index: 2;
+      user-select: none;
     }
 
-    /* Modal Styles */
+    /* MODAL STYLES */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -258,9 +273,10 @@
 
     .modal-content {
       width: 95%;
+      max-width: 900px;
       position: relative;
-      background: #000000;
-      padding: 1px  1px;
+      background: #000;
+      padding: 1rem;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -303,45 +319,43 @@
       max-width: 80%;
     }
 
-    /* Before/After Slider */
+    /* BEFORE/AFTER SLIDER */
     .before-after-slide {
       width: 100%;
       height: 75vh;
       position: relative;
       overflow: hidden;
-      background-color: rgb(245, 243, 243); 
+      background-color: #f5f3f3;
       user-select: none;
-      -webkit-user-drag: none;
       border-radius: 4px;
     }
 
     .before-after-slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover; 
+      object-fit: cover;
       user-select: none;
-      -webkit-user-drag: none;
       pointer-events: none;
       display: block;
-    }
-
-    .before-image {
       position: absolute;
       top: 0;
       left: 0;
+    }
+
+    .before-image {
       width: 50%;
       height: 100%;
       overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
       z-index: 2;
-      user-select: none;
-      -webkit-user-drag: none;
     }
 
     .before-image img {
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-      display: block;
+      position: relative;
+      left: 0;
+      top: 0;
     }
 
     .slider-handle {
@@ -356,6 +370,9 @@
       transform: translateX(-50%);
       user-select: none;
       transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .slider-handle:hover {
@@ -363,7 +380,6 @@
       width: 6px;
     }
 
-    /* RP Branded Handle */
     .slider-handle::after {
       content: "R.P";
       position: absolute;
@@ -375,14 +391,14 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-weight: bold;
       font-size: 1rem;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       user-select: none;
       transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .slider-handle:hover::after {
@@ -391,13 +407,12 @@
       transform: translate(-50%, -50%) scale(1.1);
     }
 
-    /* Swiper customization */
+    /* SWIPER CUSTOMIZATION */
     .swiper {
       width: 50%;
       height: 5%;
       padding-top: 100px;
       padding-bottom: 40px;
-      
     }
 
     .swiper-pagination-bullet {
@@ -418,6 +433,9 @@
       height: 50px;
       border-radius: 50%;
       transition: all var(--transition-speed) ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .swiper-button-next:hover,
@@ -432,7 +450,7 @@
       font-size: 1.5rem;
     }
 
-    /* Loading animation */
+    /* LOADING SPINNER */
     .loading-spinner {
       display: none;
       position: fixed;
@@ -452,10 +470,12 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
-    /* Footer */
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 2rem;
@@ -482,7 +502,7 @@
       color: var(--primary-color);
     }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -509,6 +529,12 @@
       .slider-handle::after {
         width: 40px;
         height: 40px;
+      }
+
+      .swiper {
+        width: 70%;
+        padding-top: 80px;
+        padding-bottom: 30px;
       }
     }
 
@@ -543,36 +569,31 @@
       .project-description {
         font-size: 0.9rem;
       }
+
+      .swiper {
+        width: 90%;
+        padding-top: 60px;
+        padding-bottom: 20px;
+      }
     }
 
-    /* Animation for gallery items */
+    /* ANIMATION */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-
-    .gallery-item {
-      animation: fadeIn 0.5s ease-out forwards;
-      opacity: 0;
-    }
-
-    /* Delay animations for staggered effect */
-    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
-    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
-    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
-    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
-    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
-    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
-    .gallery-item:nth-child(7) { animation-delay: 0.7s; }
-    .gallery-item:nth-child(8) { animation-delay: 0.8s; }
-    .gallery-item:nth-child(9) { animation-delay: 0.9s; }
-    .gallery-item:nth-child(10) { animation-delay: 1s; }
   </style>
 </head>
 <body>
   <!-- Loading spinner -->
-  <div class="loading-spinner" id="loadingSpinner">
-    <div class="spinner"></div>
+  <div class="loading-spinner" id="loadingSpinner" aria-hidden="true">
+    <div class="spinner" role="status" aria-label="Loading"></div>
   </div>
 
   <header>
@@ -581,327 +602,26 @@
   </header>
 
   <nav>
-    <div class="nav-container">
+    <div class="nav-container" role="navigation" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="before-after.html" class="active">Gallery</a>
+      <a href="before-after.html" class="active" aria-current="page">Gallery</a>
       <a href="contact.html">Contact</a>
     </div>
   </nav>
 
-  <div class="gallery-container">
-    <div class="service-filter">
-      <button class="active" data-filter="all">All Projects</button>
-      <button data-filter="bathroom">Bathroom</button>
-      <button data-filter="kitchen">Kitchen</button>
-      <button data-filter="Roof Maintenance">Roof Maintenance</button>
-      <button data-filter="Internal Renovation">Internal Renovation</button>
+  <main class="gallery-container">
+    <div class="service-filter" role="group" aria-label="Filter projects by service">
+      <button class="active" data-filter="all" aria-pressed="true">All Projects</button>
+      <button data-filter="bathroom" aria-pressed="false">Bathroom</button>
+      <button data-filter="kitchen" aria-pressed="false">Kitchen</button>
+      <button data-filter="Roof Maintenance" aria-pressed="false">Roof Maintenance</button>
+      <button data-filter="Internal Renovation" aria-pressed="false">Internal Renovation</button>
     </div>
 
-    <div class="gallery-grid" id="galleryGrid"></div>
-  </div>
+    <div class="gallery-grid" id="galleryGrid" aria-live="polite" aria-relevant="additions"></div>
+  </main>
 
   <!-- Modal with Swiper carousel -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeModal">&times;</span>
-
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper" id="swiperWrapper">
-          <!-- Slides inserted here -->
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-
-      <h3 class="project-title" id="projectTitle"></h3>
-      <p class="project-description" id="projectDescription"></p>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 RP Contractors. All rights reserved.</p>
-    <div class="social-links">
-      <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    const projects = [
-      {
-        id: 1,
-        title: "Modern Bathroom Makeover",
-        description: "Complete bathroom renovation with new tiles, fixtures, and lighting.",
-        service: "bathroom",
-        beforeAfterImages: [
-          {
-            before: "Images/BathroomB.jpg",
-            after: "Images/Bathroom-A - Edited.jpg"
-          },
-          {
-            before: "Images/BasinB.jpg",
-            after: "Images/BasinA.jpg"
-          }
-        ]
-      },
-      {
-        id: 2,
-        title: "Kitchen Upgrade",
-        description: "New cabinetry, countertops, and backsplash installation.",
-        service: "kitchen",
-        beforeAfterImages: [
-          {
-            before: "Images/KitchenB1.jpg",
-            after: "Images/KitchenA1.jpg"
-          },
-          { before:"Images/KitchenB2.jpg",
-            after: "Images/KitchenA2.jpg"
-          },
-           { before:"Images/KitchenB3.jpg",
-            after: "Images/KitchenA3.jpg"
-          },
-
-        ]
-      },
-      {
-        id: 3,
-        title: "Roof Maintenance",
-        description: "Resolved leaks and replaced geyser for efficient water heating.",
-        service: "Roof Maintenance",
-        beforeAfterImages: [
-          {
-            before: "Images/RoofB1.jpg",
-            after: "Images/RoofA1.jpg"
-          },
-          {
-            before: "Images/RoofB2.jpg",
-            after: "Images/RoofA2.jpg"
-          }
-
-        ]
-      },
-      {
-        id: 4,
-        title: "Internal Renovation",
-        description: "Enhanced outdoor living space with new decking and seating.",
-        service: "Internal Renovation",
-        beforeAfterImages: [
-          {
-            before: "Images/InternalB1.jpg",
-            after: "Images/InternalA1.jpg"
-          },
-          {
-            before: "Images/InternalB2.jpg",
-            after: "Images/InternalA2.jpg"
-          },
-           {
-            before: "Images/InternalB3.jpg",
-            after: "Images/InternalA3.jpg"
-          }
-        ]
-      }
-    ];
-
-    const galleryGrid = document.getElementById("galleryGrid");
-    const modal = document.getElementById("modal");
-    const closeModalBtn = document.getElementById("closeModal");
-    const swiperWrapper = document.getElementById("swiperWrapper");
-    const projectTitle = document.getElementById("projectTitle");
-    const projectDescription = document.getElementById("projectDescription");
-    const filterButtons = document.querySelectorAll(".service-filter button");
-
-    // Create gallery items from projects
-    function createGalleryItems(filter = "all") {
-      galleryGrid.innerHTML = "";
-      let filteredProjects = projects;
-
-      if (filter !== "all") {
-        filteredProjects = projects.filter(p => p.service === filter);
-      }
-
-      filteredProjects.forEach(project => {
-        const item = document.createElement("div");
-        item.className = "gallery-item";
-        item.setAttribute("data-service", project.service);
-        item.setAttribute("data-id", project.id);
-        item.setAttribute("data-title", project.title);
-
-        const img = document.createElement("img");
-        img.src = project.beforeAfterImages[0].after;
-        img.alt = project.title;
-
-        const badge = document.createElement("div");
-        badge.className = "service-badge";
-        badge.textContent = project.service.charAt(0).toUpperCase() + project.service.slice(1);
-
-        item.appendChild(img);
-        item.appendChild(badge);
-        galleryGrid.appendChild(item);
-
-        item.addEventListener("click", () => openModal(project.id));
-      });
-    }
-
-    // Initialize filter buttons
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        createGalleryItems(button.dataset.filter);
-      });
-    });
-
-    // Swiper instance
-    let swiper;
-
-    function openModal(projectId) {
-      modal.classList.add("active");
-
-      // Find project by ID
-      const project = projects.find(p => p.id === projectId);
-      projectTitle.textContent = project.title;
-      projectDescription.textContent = project.description;
-
-      // Clear swiper slides
-      swiperWrapper.innerHTML = "";
-
-      // Create slides with before/after sliders
-      project.beforeAfterImages.forEach((imgPair, index) => {
-        const slide = document.createElement("div");
-        slide.className = "swiper-slide";
-
-        // Create before/after slider container
-        const container = document.createElement("div");
-        container.className = "before-after-slide";
-
-        // Before image wrapper with width controlled by slider
-        const beforeWrapper = document.createElement("div");
-        beforeWrapper.className = "before-image";
-
-        const beforeImg = document.createElement("img");
-        beforeImg.src = imgPair.before;
-        beforeImg.alt = `Before - ${project.title}`;
-
-        beforeWrapper.appendChild(beforeImg);
-        container.appendChild(beforeWrapper);
-
-        // After image (background)
-        const afterImg = document.createElement("img");
-        afterImg.src = imgPair.after;
-        afterImg.alt = `After - ${project.title}`;
-        container.appendChild(afterImg);
-
-        // Slider handle
-        const handle = document.createElement("div");
-        handle.className = "slider-handle";
-
-        container.appendChild(handle);
-
-        slide.appendChild(container);
-        swiperWrapper.appendChild(slide);
-
-        // Setup slider handle interaction
-        setupBeforeAfterSlider(container, beforeWrapper, handle);
-      });
-
-      // Initialize swiper with updated slides
-      if (swiper) {
-        swiper.destroy(true, true);
-      }
-      swiper = new Swiper(".mySwiper", {
-        loop: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
-        allowTouchMove: false,  // <--- Disables swipe/drag
-        on: {
-          init: function () {
-            // nothing needed here
-          }
-        }
-      });
-    }
-
-    // Close modal function
-    closeModalBtn.addEventListener("click", () => {
-      modal.classList.remove("active");
-      if (swiper) {
-        swiper.destroy(true, true);
-        swiper = null;
-      }
-    });
-
-    // Close modal if clicked outside content
-    modal.addEventListener("click", e => {
-      if (e.target === modal) {
-        closeModalBtn.click();
-      }
-    });
-
-    // Before/after slider handle setup function
-    function setupBeforeAfterSlider(container, beforeWrapper, handle) {
-      let isDragging = false;
-
-      const containerRect = () => container.getBoundingClientRect();
-
-      const onMove = (clientX) => {
-        const rect = containerRect();
-        let offsetX = clientX - rect.left;
-        if (offsetX < 0) offsetX = 0;
-        if (offsetX > rect.width) offsetX = rect.width;
-
-        const percent = (offsetX / rect.width) * 100;
-        beforeWrapper.style.width = percent + "%";
-        handle.style.left = percent + "%";
-      };
-
-      handle.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        isDragging = true;
-      });
-
-      window.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        onMove(e.clientX);
-      });
-
-      // Also support touch events
-      handle.addEventListener("touchstart", (e) => {
-        isDragging = true;
-      });
-
-      window.addEventListener("touchend", () => {
-        isDragging = false;
-      });
-
-      window.addEventListener("touchmove", (e) => {
-        if (!isDragging) return;
-        if (e.touches.length > 0) {
-          onMove(e.touches[0].clientX);
-        }
-      });
-
-      // Initialize starting position at 50%
-      beforeWrapper.style.width = "50%";
-      handle.style.left = "50%";
-    }
-
-    // Initial gallery build
-    createGalleryItems();
-
-  </script>
-</body>
-</html>
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="projectTitle" tabindex="-1">
+    <div class="
