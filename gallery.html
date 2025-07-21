@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Before & After Gallery | RP Services</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #000;
+      --text-color: #fff;
+      --accent-color: #555;
+      --border-color: #333;
+      --highlight-color: #fff;
+      --primary-color: #4a6fa5;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER (matches services.html) */
+    header {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.7),
+          rgba(0, 0, 0, 0.7)
+        ),
+        url("images/services-header.jpg") center/cover no-repeat;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* NAVIGATION */
+    nav {
+      background-color: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 0 2rem;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      padding: 0.7rem 1.5rem;
+      border: 1px solid transparent;
+      transition: all var(--transition-speed) ease;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    nav a:hover {
+      border-color: var(--highlight-color);
+    }
+
+    nav a.active {
+      border-color: var(--highlight-color);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid var(--highlight-color);
+    }
+
+    /* GALLERY STYLES */
+    .gallery-container {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .service-filter {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .service-filter button {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-filter button:hover,
+    .service-filter button.active {
+      background: var(--primary-color);
+      color: var(--text-color);
+      border-color: var(--primary-color);
+    }
+
+    .service-filter button.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--highlight-color);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1;
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-speed) ease;
+      border-radius: 8px;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;          
+      -webkit-user-drag: none;   
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-drag: none;
+      pointer-events: none;
+      display: block;
+    }
+
+    .gallery-item::after {
+      content: attr(data-title);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.8rem;
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform var(--transition-speed) ease;
+      font-weight: bold;
+    }
+
+    .gallery-item:hover::after {
+      transform: translateY(0);
+    }
+
+    .service-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(65, 61, 61, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-speed) ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      width: 95%;
+      position: relative;
+      background: #000000;
+      padding: 1px  1px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 30px rgba(250, 250, 252, 0.8);
+      border: 1px solid var(--border-color);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: color var(--transition-speed) ease;
+      user-select: none;
+      z-index: 1010;
+      padding: 0.5rem;
+    }
+
+    .close-modal:hover {
+      color: var(--primary-color);
+    }
+
+    .project-title {
+      margin-top: 1.5rem;
+      color: white;
+      font-size: 1.4rem;
+      text-align: center;
+      user-select: none;
+      max-width: 90%;
+    }
+
+    .project-description {
+      margin-top: 0.5rem;
+      color: #ccc;
+      font-size: 1rem;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    /* Before/After Slider */
+    .before-after-slide {
+      width: 100%;
+      height: 75vh;
+      position: relative;
+      overflow: hidden;
+      background-color: rgb(245, 243, 243); 
+      user-select: none;
+      -webkit-user-drag: none;
+      border-radius: 4px;
+    }
+
+    .before-after-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+      display: block;
+    }
+
+    .before-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 2;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .before-image img {
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+      display: block;
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: white;
+      z-index: 3;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .slider-handle:hover {
+      background-color: var(--primary-color);
+      width: 6px;
+    }
+
+    /* RP Branded Handle */
+    .slider-handle::after {
+      content: "R.P";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: black;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .slider-handle:hover::after {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    /* Swiper customization */
+    .swiper {
+      width: 50%;
+      height: 5%;
+      padding-top: 100px;
+      padding-bottom: 40px;
+      
+    }
+
+    .swiper-pagination-bullet {
+      background: white;
+      opacity: 0.6;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color);
+      opacity: 1;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      color: var(--primary-color);
+      background: rgba(0, 0, 0, 0.8);
+      transform: scale(1.1);
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 1.5rem;
+    }
+
+    /* Loading animation */
+    .loading-spinner {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2000;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+      user-select: none;
+      background-color: #111;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .social-links a {
+      color: var(--text-color);
+      font-size: 1.5rem;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .before-after-slide {
+        height: 60vh;
+      }
+
+      .nav-container {
+        gap: 0.8rem;
+        padding: 0 1rem;
+      }
+
+      nav a {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .project-title {
+        font-size: 1.2rem;
+      }
+
+      .slider-handle::after {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-filter {
+        gap: 0.5rem;
+      }
+
+      .service-filter button {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .before-after-slide {
+        height: 50vh;
+      }
+
+      .slider-handle::after {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+
+      .project-title {
+        font-size: 1rem;
+      }
+
+      .project-description {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Animation for gallery items */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gallery-item {
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    /* Delay animations for staggered effect */
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+    .gallery-item:nth-child(10) { animation-delay: 1s; }
+  </style>
+</head>
+<body>
+  <!-- Loading spinner -->
+  <div class="loading-spinner" id="loadingSpinner">
+    <div class="spinner"></div>
+  </div>
+
+  <header>
+    <h1>Our Transformation Gallery</h1>
+    <p>See the difference quality craftsmanship makes</p>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="before-after.html" class="active">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="gallery-container">
+    <div class="service-filter">
+      <button class="active" data-filter="all">All Projects</button>
+      <button data-filter="bathroom">Bathroom</button>
+      <button data-filter="kitchen">Kitchen</button>
+      <button data-filter="Roof Maintenance">Roof Maintenance</button>
+      <button data-filter="Internal Renovation">Internal Renovation</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- Modal with Swiper carousel -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="swiperWrapper">
+          <!-- Slides inserted here -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+      <h3 class="project-title" id="projectTitle"></h3>
+      <p class="project-description" id="projectDescription"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 RP Contractors. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const projects = [
+      {
+        id: 1,
+        title: "Modern Bathroom Makeover",
+        description: "Complete bathroom renovation with new tiles, fixtures, and lighting.",
+        service: "bathroom",
+        beforeAfterImages: [
+          {
+            before: "Images/BathroomB.jpg",
+            after: "Images/Bathroom-A - Edited.jpg"
+          },
+          {
+            before: "Images/BasinB.jpg",
+            after: "Images/BasinA.jpg"
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Kitchen Upgrade",
+        description: "New cabinetry, countertops, and backsplash installation.",
+        service: "kitchen",
+        beforeAfterImages: [
+          {
+            before: "Images/KitchenB1.jpg",
+            after: "Images/KitchenA1.jpg"
+          },
+          { before:"Images/KitchenB2.jpg",
+            after: "Images/KitchenA2.jpg"
+          },
+           { before:"Images/KitchenB3.jpg",
+            after: "Images/KitchenA3.jpg"
+          },
+
+        ]
+      },
+      {
+        id: 3,
+        title: "Roof Maintenance",
+        description: "Resolved leaks and replaced geyser for efficient water heating.",
+        service: "Roof Maintenance",
+        beforeAfterImages: [
+          {
+            before: "Images/RoofB1.jpg",
+            after: "Images/RoofA1.jpg"
+          },
+          {
+            before: "Images/RoofB2.jpg",
+            after: "Images/RoofA2.jpg"
+          }
+
+        ]
+      },
+      {
+        id: 4,
+        title: "Internal Renovation",
+        description: "Enhanced outdoor living space with new decking and seating.",
+        service: "Internal Renovation",
+        beforeAfterImages: [
+          {
+            before: "Images/InternalB1.jpg",
+            after: "images/InternalA1.jpg"
+          },
+          {
+            before: "Images/InternalB2.jpg",
+            after: "Images/InternalA2.jpg"
+          },
+           {
+            before: "Images/InternalB3.jpg",
+            after: "Images/InternalA3.jpg"
+          }
+        ]
+      }
+    ];
+
+    const galleryGrid = document.getElementById("galleryGrid");
+    const modal = document.getElementById("modal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const swiperWrapper = document.getElementById("swiperWrapper");
+    const projectTitle = document.getElementById("projectTitle");
+    const projectDescription = document.getElementById("projectDescription");
+    const filterButtons = document.querySelectorAll(".service-filter button");
+
+    // Create gallery items from projects
+    function createGalleryItems(filter = "all") {
+      galleryGrid.innerHTML = "";
+      let filteredProjects = projects;
+
+      if (filter !== "all") {
+        filteredProjects = projects.filter(p => p.service === filter);
+      }
+
+      filteredProjects.forEach(project => {
+        const item = document.createElement("div");
+        item.className = "gallery-item";
+        item.setAttribute("data-service", project.service);
+        item.setAttribute("data-id", project.id);
+        item.setAttribute("data-title", project.title);
+
+        const img = document.createElement("img");
+        img.src = project.beforeAfterImages[0].after;
+        img.alt = project.title;
+
+        const badge = document.createElement("div");
+        badge.className = "service-badge";
+        badge.textContent = project.service.charAt(0).toUpperCase() + project.service.slice(1);
+
+        item.appendChild(img);
+        item.appendChild(badge);
+        galleryGrid.appendChild(item);
+
+        item.addEventListener("click", () => openModal(project.id));
+      });
+    }
+
+    // Initialize filter buttons
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        createGalleryItems(button.dataset.filter);
+      });
+    });
+
+    // Swiper instance
+    let swiper;
+
+    function openModal(projectId) {
+      modal.classList.add("active");
+
+      // Find project by ID
+      const project = projects.find(p => p.id === projectId);
+      projectTitle.textContent = project.title;
+      projectDescription.textContent = project.description;
+
+      // Clear swiper slides
+      swiperWrapper.innerHTML = "";
+
+      // Create slides with before/after sliders
+      project.beforeAfterImages.forEach((imgPair, index) => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+
+        // Create before/after slider container
+        const container = document.createElement("div");
+        container.className = "before-after-slide";
+
+        // Before image wrapper with width controlled by slider
+        const beforeWrapper = document.createElement("div");
+        beforeWrapper.className = "before-image";
+
+        const beforeImg = document.createElement("img");
+        beforeImg.src = imgPair.before;
+        beforeImg.alt = `Before - ${project.title}`;
+
+        beforeWrapper.appendChild(beforeImg);
+        container.appendChild(beforeWrapper);
+
+        // After image (background)
+        const afterImg = document.createElement("img");
+        afterImg.src = imgPair.after;
+        afterImg.alt = `After - ${project.title}`;
+        container.appendChild(afterImg);
+
+        // Slider handle
+        const handle = document.createElement("div");
+        handle.className = "slider-handle";
+
+        container.appendChild(handle);
+
+        slide.appendChild(container);
+        swiperWrapper.appendChild(slide);
+
+        // Setup slider handle interaction
+        setupBeforeAfterSlider(container, beforeWrapper, handle);
+      });
+
+      // Initialize swiper with updated slides
+      if (swiper) {
+        swiper.destroy(true, true);
+      }
+      swiper = new Swiper(".mySwiper", {
+        loop: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        allowTouchMove: false,  // <--- Disables swipe/drag
+        on: {
+          init: function () {
+            // nothing needed here
+          }
+        }
+      });
+    }
+
+    // Close modal function
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      if (swiper) {
+        swiper.destroy(true, true);
+        swiper = null;
+      }
+    });
+
+    // Close modal if clicked outside content
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        closeModalBtn.click();
+      }
+    });
+
+    // Before/after slider handle setup function
+    function setupBeforeAfterSlider(container, beforeWrapper, handle) {
+      let isDragging = false;
+
+      const containerRect = () => container.getBoundingClientRect();
+
+      const onMove = (clientX) => {
+        const rect = containerRect();
+        let offsetX = clientX - rect.left;
+        if (offsetX < 0) offsetX = 0;
+        if (offsetX > rect.width) offsetX = rect.width;
+
+        const percent = (offsetX / rect.width) * 100;
+        beforeWrapper.style.width = percent + "%";
+        handle.style.left = percent + "%";
+      };
+
+      handle.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isDragging = true;
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        onMove(e.clientX);
+      });
+
+      // Also support touch events
+      handle.addEventListener("touchstart", (e) => {
+        isDragging = true;
+      });
+
+      window.addEventListener("touchend", () => {
+        isDragging = false;
+      });
+
+      window.addEventListener("touchmove", (e) => {
+        if (!isDragging) return;
+        if (e.touches.length > 0) {
+          onMove(e.touches[0].clientX);
+        }
+      });
+
+      // Initialize starting position at 50%
+      beforeWrapper.style.width = "50%";
+      handle.style.left = "50%";
+    }
+
+    // Initial gallery build
+    createGalleryItems();
+
+  </script>
+</body>
+</html>
